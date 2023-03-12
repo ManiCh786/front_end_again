@@ -1,0 +1,1 @@
+export 'objective_screen_controller_binding.dart';
