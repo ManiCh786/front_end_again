@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:front_end/screens/faculty/reports/piechart.dart';
 import 'package:get/get.dart';
 
 import '../../../../controllers/controller.dart';
@@ -8,6 +9,8 @@ import '../../../../models/models.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/widgets.dart';
 import '../../../data/repository/assessments_marks_repo.dart';
+import '../../hod/hod panel/dashbaord/screens/coursespecification.dart/widgets/piechart_report.dart';
+import 'breakdownpiechart.dart';
 class ViewObjectivesReport extends StatelessWidget {
   ViewObjectivesReport({
     Key? key,
@@ -64,11 +67,10 @@ class ViewObjectivesReport extends StatelessWidget {
             // .where((e) => e['ass_added_by']==currentUserId).where((e) => e['session']==session)
             .toList()
               .obs;
+              final pieValue=(list.length/total)*100;
               print("total list = ${list.length }");
-  print("total QUizes  = ${total.toString() }");
+  print("pieValue valuye is ${pieValue} ");
 
-
-        int userId = userAuthController.getUserId();
         return Padding(
             padding: const EdgeInsets.only(left: 16),
             child: Container(
@@ -208,12 +210,14 @@ class ViewObjectivesReport extends StatelessWidget {
                                   const SizedBox(height: 30),
                                   Text(
       'Overall Course Accomplished: ${(list.length/total)*100} %',
-      style: TextStyle(
+      style:const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
         color: Colors.black,
       ),
     ),
+    
+    PieChartReportt(value: "$pieValue"),
                                 ],
                               ),
                     ),
@@ -369,10 +373,11 @@ class ObjectivesReport extends StatelessWidget {
                                                 ),
                                                 DataCell(
                                                   Text(
-                                                   list[i]
-                                                            [
-                                                            'assessmentType'] ??
-                                                        "null",
+                                                    "Outcome",
+                                                  //  list[i]
+                                                  //           [
+                                                  //           'assessmentType'] ??
+                                                  //       "null",
                                                     style: const TextStyle(
                                                         fontFamily: 'Poppins'),
                                                   ),
@@ -402,7 +407,7 @@ class ObjectivesReport extends StatelessWidget {
                                               ])
                                           ]),
                                       const SizedBox(height: 30),
-                                    
+                                    PieChartReporttt(value: '${(list.length/totalNo) * 100.round()}',),
                                          
                                     ],
                                   ),
